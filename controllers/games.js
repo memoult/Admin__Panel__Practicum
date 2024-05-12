@@ -44,17 +44,6 @@ const updateGamesArray = (req, res, next) => {
   }
 };
 
-const sendAllGames = (req, res) => {
-  res.send(req.games);
-};
-
-const sendUpdatedGames = (req, res) => {
-  res.send({
-    games: req.games,
-    updated: req.updatedObject
-  });
-};
-
 const updateGamesFile = async (req, res, next) => {
   await writeData("./data/games.json", req.games);
   next();
@@ -73,11 +62,24 @@ const deleteGame = (req, res, next) => {
   next();
 };
 
+const sendAllGames = (req, res) => {
+  res.send(req.games);
+};
+
+const sendUpdatedGames = (req, res) => {
+  res.send({
+    games: req.games,
+    updated: req.updatedObject
+  });
+};
+
 module.exports = {
   getAllGames,
   checkIsTitleInArray,
   updateGamesArray,
   updateGamesFile,
   findGameById,
-  deleteGame
+  deleteGame,
+  sendUpdatedGames,
+  sendAllGames
 };
